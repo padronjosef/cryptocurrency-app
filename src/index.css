@@ -1,7 +1,8 @@
 body {
   background-color: #0d2235;
   color: white;
-  padding: .5rem;
+  padding: 1rem;
+  margin: 0;
 }
 
 .error {

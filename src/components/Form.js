@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import Axios from "axios";
 
@@ -76,13 +77,13 @@ const Form = ({ setCoin, setCrypto }) => {
 
     // set the dates to the principal component
     setError(false);
-    setCoin(coin)
-    setCrypto(crypto)
+    setCoin(coin);
+    setCrypto(crypto);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {error? <Error message="All the Fields are required"/> : null}
+      {error ? <Error message="All the Fields are required" /> : null}
       <SelectCoin />
       <SelectCrypto />
       <Button type="submit" value="calculate">
@@ -90,6 +91,11 @@ const Form = ({ setCoin, setCrypto }) => {
       </Button>
     </form>
   );
+};
+
+Form.propTypes = {
+  setCoin: PropTypes.func.isRequired,
+  setCrypto: PropTypes.func.isRequired,
 };
 
 export default Form;

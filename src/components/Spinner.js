@@ -1,5 +1,5 @@
 import React from "react";
-import "./Spinnes.css"
+import "./Spinnes.css";
 
 const Spinner = () => (
   <div className="sk-chase">
