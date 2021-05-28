@@ -26,14 +26,18 @@ const Price = styled.p`
   }
 `;
 
-const Quote = ({ result, coin, crypto }) => {
+const Quote = ({ quantity, result, coin, crypto }) => {
   if (!Object.keys(result).length) return null;
+
+  // taking de prince, deleting special characters and making it a string
+  let priceNumber = parseInt(result.PRICE.replace(/\D/g, ""));
+
   return (
     <ResultDiv>
       <Price>
-        1 {crypto} cost:{" "}
+        {quantity} {crypto} cost:{" "}
         <span>
-          {result.PRICE} {coin}
+          $ {priceNumber * quantity} {coin}
         </span>
       </Price>
       <Info>
@@ -53,6 +57,7 @@ const Quote = ({ result, coin, crypto }) => {
 };
 
 Quote.propTypes = {
+  quantity: PropTypes.number.isRequired,
   result: PropTypes.object.isRequired,
   coin: PropTypes.string.isRequired,
   crypto: PropTypes.string.isRequired,

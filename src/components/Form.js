@@ -7,6 +7,28 @@ import useCoin from "../hooks/useCoin";
 import useCryptocurrency from "../hooks/useCryptocurrency";
 import Error from "../components/Error";
 
+const Label = styled.label`
+  font-family: "bebas Neue", cursive;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.2rem;
+  display: block;
+`;
+
+const Quantity = styled.input`
+  width: 100%;
+  display: block;
+  padding: 0.8rem;
+  -webkit-appearance: none;
+  border-radius: 10px;
+  border-radius: none;
+  font-size: 1rem;
+  box-sizing: border-box;
+`;
+
 const Button = styled.button`
   margin-top: 20px;
   font-weight: bold;
@@ -25,7 +47,7 @@ const Button = styled.button`
   }
 `;
 
-const Form = ({ setCoin, setCrypto }) => {
+const Form = ({ setCoin, setCrypto, quantity, setQuantity }) => {
   // list of cryptocurrencies
   const [cryptoList, setCryptoList] = useState([]);
 
@@ -67,7 +89,7 @@ const Form = ({ setCoin, setCrypto }) => {
     e.preventDefault();
 
     // validate if all the filds are select
-    if (!coin || !crypto) {
+    if (!coin || !crypto || quantity <= 0) {
       setError(true);
       setTimeout(() => {
         setError(false);
@@ -80,10 +102,18 @@ const Form = ({ setCoin, setCrypto }) => {
     setCoin(coin);
     setCrypto(crypto);
   };
+  
+  const handleChange = (e) => setQuantity(e.target.value)
 
   return (
     <form onSubmit={handleSubmit}>
       {error ? <Error message="All the Fields are required" /> : null}
+      <Label>Quantity</Label>
+      <Quantity
+        type="number"
+        onChange={handleChange}
+        value={quantity}
+      />
       <SelectCoin />
       <SelectCrypto />
       <Button type="submit" value="calculate">
@@ -96,6 +126,7 @@ const Form = ({ setCoin, setCrypto }) => {
 Form.propTypes = {
   setCoin: PropTypes.func.isRequired,
   setCrypto: PropTypes.func.isRequired,
+  setQuantity: PropTypes.func.isRequired,
 };
 
 export default Form;

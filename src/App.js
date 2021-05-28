@@ -41,6 +41,7 @@ const Heading = styled.h1`
 `;
 
 const App = () => {
+  const [quantity, setQuantity] = useState(1);
   const [coin, setCoin] = useState("");
   const [crypto, setCrypto] = useState("");
   const [result, setResult] = useState({});
@@ -72,7 +73,13 @@ const App = () => {
   const component = loading ? (
     <Spinner />
   ) : (
-    <Quote result={result} setCoin={setCoin} coin={coin} crypto={crypto} />
+    <Quote
+      result={result}
+      setCoin={setCoin}
+      coin={coin}
+      crypto={crypto}
+      quantity={quantity}
+    />
   );
 
   return (
@@ -82,7 +89,12 @@ const App = () => {
       </div>
       <div>
         <Heading>Quote Cryptocurrencies Instantly</Heading>
-        <Form setCoin={setCoin} setCrypto={setCrypto} />
+        <Form
+          quantity={quantity}
+          setCoin={setCoin}
+          setCrypto={setCrypto}
+          setQuantity={setQuantity}
+        />
         {component}
       </div>
     </Wrapper>
